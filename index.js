@@ -34,6 +34,14 @@ client.connect(err => {
     res.send('events posted');
   });
 
+  // Get All  Data
+    app.get("/getEvents", (req, res)=>{
+        eventCollection.find({}).toArray((err, result)=>{
+            if(err) throw err;
+            res.send(result);
+        })
+    })
+
 });
 
 app.get("/", (req,res)=>{
