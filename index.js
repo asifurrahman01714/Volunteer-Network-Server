@@ -26,12 +26,12 @@ client.connect(err => {
   const eventCollection = client.db("volunteerNetwork").collection("events");
   console.log('database connected');
 
-  // Post Data
+  // Post All Data
   app.post("/postEvents", (req, res)=>{
-    const event = req.body;
-    eventCollection.insertOne(event);
-    console.log(event);
-    res.send('event posted');
+    const events = req.body;
+    eventCollection.insertMany(events);
+    console.log(events);
+    res.send('events posted');
   });
 
 });
