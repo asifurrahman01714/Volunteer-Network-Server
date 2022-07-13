@@ -15,6 +15,19 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })); // for file
 
 
+// MongoDb Connection
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const mongoDbUserPassword = process.env.DB_PASS;
+const mongoDbUser = process.env.DB_USER;
+const uri = `mongodb+srv://${mongoDbUser}:${mongoDbUserPassword}@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority`;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+client.connect(err => {
+  const collection = client.db("volunteerNetwork").collection("events");
+  console.log('database connected');
+
+});
+
 app.get("/", (req,res)=>{
     console.log("Requesting anyone");
     res.send("Hi! I have got response")
@@ -49,7 +62,7 @@ const mongoDbUser = process.env.DB_USER;
 const uri = `mongodb+srv://${mongoDbUser}:${mongoDbUserPassword}@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
-  const collection = client.db("burjAlArabHotel").collection("bookings");
+  const collection = client.db("volunteerNetwork").collection("events");
   console.log('database connected');
   // Post data
   app.post("/addBooking", (req, res)=>{
