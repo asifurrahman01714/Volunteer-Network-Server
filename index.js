@@ -23,8 +23,16 @@ const mongoDbUser = process.env.DB_USER;
 const uri = `mongodb+srv://${mongoDbUser}:${mongoDbUserPassword}@atlascluster.eb7mhhm.mongodb.net/?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 client.connect(err => {
-  const collection = client.db("volunteerNetwork").collection("events");
+  const eventCollection = client.db("volunteerNetwork").collection("events");
   console.log('database connected');
+
+  // Post Data
+  app.post("/postEvents", (req, res)=>{
+    const event = req.body;
+    eventCollection.insertOne(event);
+    console.log(event);
+    res.send('event posted');
+  });
 
 });
 
