@@ -38,7 +38,7 @@ client.connect(err => {
 
   app.post('/addEvent',(req, res)=>{
     const event = req.body;
-    event.date = new Date();
+    event.date = new Date().toDateString();
     eventCollection.insertOne(event);
     console.log(event);
     res.send(event);
