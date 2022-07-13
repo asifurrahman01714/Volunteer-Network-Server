@@ -34,6 +34,15 @@ client.connect(err => {
     res.send('events posted');
   });
 
+  // Add a single event
+
+  app.post('/addEvent',(req, res)=>{
+    const event = req.body;
+    event.date = new Date();
+    eventCollection.insertOne(event);
+    console.log(event);
+    res.send(event);
+  })
   // Get All  Data
     app.get("/getEvents", (req, res)=>{
         eventCollection.find({}).toArray((err, result)=>{
