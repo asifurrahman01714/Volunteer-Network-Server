@@ -49,7 +49,12 @@ client.connect(err => {
             if(err) throw err;
             res.send(result);
         })
-    })
+  })
+
+  // Delete Event
+  app.delete('/deleteEvent/:id', (req,res)=>{
+    console.log(req.params.id);
+  })
 
 });
 
