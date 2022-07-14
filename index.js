@@ -57,8 +57,10 @@ client.connect(err => {
     console.log(ObjectId(req.params.id));
     eventCollection.deleteOne({_id : ObjectId(req.params.id)})
     .then(result =>{
-        console.log(result);
+        console.log(result.deletedCount> 0);
+        res.send(result.deletedCount> 0)
     })
+
   })
 
 });
