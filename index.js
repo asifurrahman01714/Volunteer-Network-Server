@@ -42,7 +42,7 @@ client.connect(err => {
     eventCollection.insertOne(event);
     console.log(event);
     res.send(event);
-  })
+  })  
   // Get All  Data
     app.get("/getEvents", (req, res)=>{
         eventCollection.find({}).toArray((err, result)=>{
